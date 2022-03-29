@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    cors跨域问题 | zhangyj Blog
+  </title>
+  <meta name="description" content="My Blog Description">
+  
+  <meta name="keywords" content="
+  java
+  ">
+  
+  <meta name="author" content="zhangyj">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20220327204436.bmp"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives"
+           class="header-toolbar-right"> 5 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tags"
+           class="header-toolbar-right"> 2 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories"
+           class="header-toolbar-right"> 2 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">zhangyj Blog</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    zhangyj
+
+    <span class="post-date float-right" title="{{moment(1495771977000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      
+          <i class="fa fa-pencil-square-o"></i>
+      
+      {{moment(1495771977000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>cors跨域问题</h1>
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近做系统整合，涉及到统一认证和跨域问题，总结跨域如下，统一认证放另外博客</p>
+<h2 id="跨域总结"><a href="#跨域总结" class="headerlink" title="跨域总结"></a>跨域总结</h2><p>针对目前都是前后端分离项目，跨域问题很常见，跨域错误通常403如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20210221180458.png" alt="image-20210221180458705"></p>
+<p>针对跨域解决办法通常是创建filter CorsFilter，允许所有跨域，问题基本都能解决。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 全局跨域配置</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalCorsConfig</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 允许跨域调用的过滤器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CorsFilter <span class="title function_">corsFilter</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">CorsConfiguration</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorsConfiguration</span>();</span><br><span class="line">        <span class="comment">//允许所有域名进行跨域调用</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">//允许跨越发送cookie</span></span><br><span class="line">        config.setAllowCredentials(<span class="literal">true</span>);</span><br><span class="line">        <span class="comment">//放行全部原始头信息</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">//允许所有请求方法跨域调用</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="type">UrlBasedCorsConfigurationSource</span> <span class="variable">source</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UrlBasedCorsConfigurationSource</span>();</span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, config);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CorsFilter</span>(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者在NGINX上配置如下也可以解决</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add_header Access-Control-Allow-Origin &#x27;*&#x27;;</span><br><span class="line">add_header Access-Control-Allow-Credentials &#x27;true&#x27;;</span><br><span class="line">add_header Access-Control-Allow-Headers &quot;Origin, X-Requested-With, Content-Type, Accept&quot;;</span><br><span class="line">add_header Access-Control-Allow-Methods &quot;GET, POST, OPTIONS&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>那么这样解决的背后原理是什么呢？</p>
+<p>先说跨域的介绍和历史</p>
+<h3 id="跨域概念"><a href="#跨域概念" class="headerlink" title="跨域概念"></a>跨域概念</h3><p>CORS全称Cross-Origin Resource Sharing，意为跨域资源共享。当一个资源去访问另一个不同域名或者同域名不同端口的资源时，就会发出跨域请求。如果此时另一个资源不允许其进行跨域资源访问，那么访问的那个资源就会遇到跨域问题。</p>
+<p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。</p>
+<p>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。</p>
+<p>因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。</p>
+<h3 id="跨域的历史"><a href="#跨域的历史" class="headerlink" title="跨域的历史"></a>跨域的历史</h3><p>1995年由Netscape提出同源策略，浏览器在发送Ajax请求时，只接收同域服务器响应的数据资源；那么什么才算同域呢？很简单，协议、域名、端口全部相同才算同一域下，三个条件有一个不一致，都不算同域，既跨域；</p>
+<p>因此，即使是我们自己的域名服务器，而二级域名或三级域名不一致，也会出现跨域，如：<a target="_blank" rel="noopener" href="http://a.yhd.com与/">http://a.yhd.com与</a> <a target="_blank" rel="noopener" href="http://b.yhd.com/">http://b.yhd.com</a> 之间需要数据交互，就跨域了；</p>
+<p>这就让人很苦恼了，明明都是我自己的域名，我自己的服务器，还是受到了同源策略的保护无法进行数据交互；这不能算是设计缺陷，只能说当年考虑不周全，也有可能因为当年网络通信协议的不健全，原因不得而知；</p>
+<p>解决跨域就是够使两个不同域下的数据进行顺利交互就可以了；各路解决方案中，最为典型的有两个：</p>
+<p>JSONP和同域代理；</p>
+<p><strong>同域代理</strong>就是使用Ajax向同域下的后台发送请求，同时携带真实请求的地址及参数，后台接受请求后直接根据地址及参数转发请求，因为后台是可以直接模拟HTTP客户端发送请求的，所以没有跨域问题，而后台接受到响应数据后再原样返回给前端浏览器，从而实现跨域数据交互；</p>
+<p><strong>JSONP</strong>是利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，原生具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的函数调用，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互；</p>
+<p>JSONP和同域代理，本质上并没有解决Ajax跨域的问题，只是绕开这个问题而另辟蹊径实现的跨域数据交互，在数据交互层面上可以看做技术不成熟时的临时解决方案；但是JSONP 和同域代理 使用了很多年，当然跨域问题也存在了很多年，终于有人看不下去了，提出了浏览器与服务器跨域通信的安全性通信策略，它就是我们今天的主角 跨域资源共享(Cross-origin resource sharing)，简称 CORS ; 有了它，我们可以安全放心的抛弃 JSONP 和 同域代理了，步入正统的跨域数据交互的殿堂；</p>
+<h3 id="跨域的解决方案：cors"><a href="#跨域的解决方案：cors" class="headerlink" title="跨域的解决方案：cors"></a>跨域的解决方案：cors</h3><p>CORS 的使用由一系列传输的HTTP头组成，这些HTTP头有两个作用，<br>1：用于阻止还是允许浏览器向其他域名发起请求；<br>2：用于接受还是拒绝其他域名返回的响应数据；<br>因此只要搞清楚<strong>什么样的头信息是控制浏览器发送还是不发送请求，什么样的头信息控制浏览器接受还是拒绝服务器的响应数据</strong>，这两点搞明白，CORS就算彻底搞清楚了；</p>
+<p>跨域请求被分为了两种类型，一种是简单请求，一种是复杂请求 (需预检请求)；简单请求与普通的ajax请求无异；但复杂请求，必须在正式发送请求前先发送一个OPTIONS方法的请求已得到服务器的同意，若没有得到服务器的同意，浏览器不会发送正式请求；因此下图跨域错误就是OPTIONS请求没有得到服务器的同意，浏览器不发送正式请求的错误。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20210221180458.png" alt="image-20210221180458705"></p>
+<p>我们目前前后端交互content_type都是applicaion&#x2F;json，这种属于复杂请求，因此我们忽略简单请求，只分析复杂请求。</p>
+<p>例子如下：</p>
+<p>前后端分离，前端运行在<a href="http://localhost:8090，访问后端接口http://localhost:8082/admin/login，因为端口不同，发生跨域，跨域会先发个OPTIONS请求判断服务器是否允许跨域，那么浏览器是如何知道服务器允许跨域呢？服务器会在response">http://localhost:8090，访问后端接口http://localhost:8082/admin/login，因为端口不同，发生跨域，跨域会先发个OPTIONS请求判断服务器是否允许跨域，那么浏览器是如何知道服务器允许跨域呢？服务器会在response</a> header内返回Access-Control-Allow-Origin，浏览器根据这个头判断接受服务器响应。</p>
+<p>跨域必须会有http header的Origin字段，表示请求来源，比如下图是个预检(preFlight)请求，如下图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20210221205020.png" alt="image-20210221204234122"></p>
+<p>服务端没有返回Access-Control-Allow-Origin，因此浏览器决绝发出跨域的正式请求，报错如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20210221180458.png" alt="image-20210221180458705"></p>
+<p>“预检”请求除了Origin字段，”预检”请求的头信息包括两个特殊字段。</p>
+<p>（1）Access-Control-Request-Method</p>
+<p>该字段是必须的，用来列出浏览器的CORS请求(正式请求)会用到哪些HTTP方法，上例是POST。</p>
+<p>（2）Access-Control-Request-Headers</p>
+<p>该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是content_type。</p>
+<p>在增加了CorsFilter后，请求截图如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20210221213240.png" alt="image-20210221213240359"></p>
+<p>第一个&#x2F;admin&#x2F;login是预检请求OPTIONS，服务器收到”预检”请求以后，检查了Origin、Access-Control-Request-Method和Access-Control-Request-Headers字段以后，确认允许跨源请求，做出回应，在response header内返回了Access-Control-Allow-Origin: <a href="http://localhost:8090，因此浏览器认为服务器允许跨域，因此跨域发送正式请求(Access-Control-Allow-Origin字段也可以设为星号，表示同意任意跨源请求。)。">http://localhost:8090，因此浏览器认为服务器允许跨域，因此跨域发送正式请求(Access-Control-Allow-Origin字段也可以设为星号，表示同意任意跨源请求。)。</a></p>
+<p>第二个&#x2F;admin&#x2F;login是正式请求。</p>
+<p>CORS中最常使用的request请求头为 Origin、Access-Control-Request-Headers、Access-Control-Request-Method;<br>CORS中最常使用的response响应头为 Access-Control-Allow-Origin、Access-Control-Allow-Headers、Access-Control-Expose-Headers;</p>
+<p><strong>request上送字段：</strong></p>
+<p>Origin：该字段必须，在request内上送，表示请求的来源，在跨域中，表示跨域请求的来源方</p>
+<p>Access-Control-Request-Method：该字段必须，用来列出浏览器的CORS请求会用到哪些HTTP方法</p>
+<p>Access-Control-Request-Headers：该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是<code>content_type</code>。</p>
+<p><strong>response响应字段：</strong></p>
+<p>Access-Control-Allow-Origin：该字段必需，请求的资源能共享给哪些域，它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求</p>
+<p>Access-Control-Allow-Headers：该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次”预检”请求。</p>
+<p>Access-Control-Allow-Credentials：该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。</p>
+<p>Access-Control-Expose-Headers：该字段可选。CORS请求时，ajax请求XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。</p>
+<p>Access-Control-Max-Age：该字段可选，用来指定本次预检请求的有效期，单位为秒。在此缓存期间，不用发出另一条预检请求。</p>
+<h3 id="CorsFilter简单分析"><a href="#CorsFilter简单分析" class="headerlink" title="CorsFilter简单分析"></a>CorsFilter简单分析</h3><p>从上面分析，允许跨域，关键是response header内返回Access-Control-Allow-Origin，这个字段是在CorsFilter内，源码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doFilterInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response,</span></span><br><span class="line"><span class="params">			FilterChain filterChain)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (CorsUtils.isCorsRequest(request)) &#123;<span class="comment">//request header有Origin则认为是跨域请求</span></span><br><span class="line">        <span class="type">CorsConfiguration</span> <span class="variable">corsConfiguration</span> <span class="operator">=</span> <span class="built_in">this</span>.configSource.getCorsConfiguration(request);</span><br><span class="line">        <span class="keyword">if</span> (corsConfiguration != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">isValid</span> <span class="operator">=</span> <span class="built_in">this</span>.processor.processRequest(corsConfiguration, request, response);<span class="comment">//关键方法</span></span><br><span class="line">            <span class="comment">//CorsUtils.isPreFlightRequest(request)方法为true的情况：request header有Origin、Access-Control-Request-Method且http method是OPTIONS，则认为是预检</span></span><br><span class="line">            <span class="keyword">if</span> (!isValid || CorsUtils.isPreFlightRequest(request)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;<span class="comment">//是预检方法，或者跨域不允许，直接返回</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    filterChain.doFilter(request, response);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在关键方法内，如果允许跨域，handleInternal会给response header设置Access-Control-Allow-Origin，表示允许跨域</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="nginx设置允许跨域"><a href="#nginx设置允许跨域" class="headerlink" title="nginx设置允许跨域"></a>nginx设置允许跨域</h3><p>通常允许跨域，可以简单粗暴使用nginx配置，而不使用CorsFilter，只需要设置如下即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add_header Access-Control-Allow-Origin <span class="string">&#x27;*&#x27;</span>;</span><br><span class="line">add_header Access-Control-Allow-Credentials <span class="string">&#x27;true&#x27;</span>;</span><br><span class="line">add_header Access-Control-Allow-Headers <span class="string">&quot;Origin, X-Requested-With, Content-Type, Accept&quot;</span>;</span><br><span class="line">add_header Access-Control-Allow-Methods <span class="string">&quot;GET, POST, OPTIONS&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>原因也是给response header设置Access-Control-Allow-Origin，这样浏览器就允许跨域了，通常许多项目也是这么简单粗暴的设置，或者粗暴的加上CorsFilter。</p>
+<h3 id="cors总结"><a href="#cors总结" class="headerlink" title="cors总结"></a>cors总结</h3><p>跨域就是ajax请求访问不同域下的资源，由于同源策略控制，默认不允许跨域。跨域是浏览器和服务端共同实现的（http协议），浏览器都支持跨域，关键在服务器，服务器通过Access-Control-Allow-Origin来控制是否允许跨域。Access-Control-Allow-XXX头的作用是浏览器是否可以发起跨域，这个过程和前端代码无关。</p>
+<h2 id="一些其它零碎记录"><a href="#一些其它零碎记录" class="headerlink" title="一些其它零碎记录"></a>一些其它零碎记录</h2><h3 id="AJAX请求"><a href="#AJAX请求" class="headerlink" title="AJAX请求"></a>AJAX请求</h3><p>AJAX &#x3D; Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。</p>
+<p>AJAX 不是新的编程语言，而是一种使用现有标准的新方法。</p>
+<p>AJAX 最大的优点是在不重新加载整个页面的情况下，可以与服务器交换数据并更新部分网页内容。</p>
+<p>AJAX 不需要任何浏览器插件，但需要用户允许JavaScript在浏览器上执行。</p>
+<h3 id="后端如何判断是AJAX请求和json请求"><a href="#后端如何判断是AJAX请求和json请求" class="headerlink" title="后端如何判断是AJAX请求和json请求"></a>后端如何判断是AJAX请求和json请求</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断ajax请求</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isRequestAjax</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">ajaxHeader</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;X-Requested-With&quot;</span>);</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">isAjax</span> <span class="operator">=</span> <span class="string">&quot;XMLHttpRequest&quot;</span>.equals(ajaxHeader);</span><br><span class="line">    <span class="keyword">return</span> isAjax;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//判断json请求</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isJsonRequest</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request.getHeader(<span class="string">&quot;Accept&quot;</span>) != <span class="literal">null</span></span><br><span class="line">        &amp;&amp; request.getHeader(<span class="string">&quot;Accept&quot;</span>).contains(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在服务器端判断request来自Ajax请求(异步)还是传统请求(同步)：<br>两种请求在请求的Header不同，Ajax 异步请求比传统的同步请求多了一个头参数x-requested-with ，可以利用它，request.getHeader(“x-requested-with”); 为 null，则为传统同步请求，为 XMLHttpRequest，则为 Ajax 异步请求。</p>
+<h3 id="AJAX请求和json请求区别"><a href="#AJAX请求和json请求区别" class="headerlink" title="AJAX请求和json请求区别"></a>AJAX请求和json请求区别</h3><p>目前来说，前后端交互，数据类型都是application&#x2F;json，数据类型是json也实际使用的是ajax请求，单纯使用ajax时候accept content_type是form表单。</p>
+<h3 id="ajax和axios请求json数据"><a href="#ajax和axios请求json数据" class="headerlink" title="ajax和axios请求json数据"></a>ajax和axios请求json数据</h3><p>目前前后端交互，通常使用的vue和react都是通过axios和后端发生交互，axios是通过promise实现对ajax技术的一种封装，就像jQuery实现ajax封装一样。<br>简单来说： ajax技术实现了网页的局部数据刷新，axios实现了对ajax的封装。axios是ajax 但ajax不止axios</p>
+<h3 id="跨域判断"><a href="#跨域判断" class="headerlink" title="跨域判断"></a>跨域判断</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//请求header有Origin则判断为跨域</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">isCorsRequest</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (request.getHeader(<span class="string">&quot;Origin&quot;</span>) != <span class="literal">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>跨域例子如下图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20210219172159.png" alt="image-20210219172159251"></p>
+<h3 id="http-header内的referer的作用"><a href="#http-header内的referer的作用" class="headerlink" title="http header内的referer的作用"></a>http header内的referer的作用</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">referer  是  HTTP  请求header 的一部分，当浏览器（或者模拟浏览器行为）向web 服务器发送请求的时候，头信息里有包含Referer。比如我在www.google.com 里有一个www.baidu.com 链接，那么点击这个www.baidu.com ，它的header 信息里就有：Referer=http://www.google.com 由此可以看出来吧。它就是表示一个来源</span><br><span class="line"></span><br><span class="line">Referer的作用？</span><br><span class="line">1.防盗链。</span><br><span class="line">我在www.google.com里有一个www.baidu.com链接，那么点击这个www.baidu.com，它的header信息里就有：</span><br><span class="line">Referer=http://www.google.com </span><br><span class="line">那么可以利用这个来防止盗链了，比如我只允许我自己的网站访问我自己的图片服务器，那我的域名是www.google.com，那么图片服务器每次取到Referer来判断一下是不是我自己的域名www.google.com，如果是就继续访问，不是就拦截。</span><br><span class="line"></span><br><span class="line">这是不是就达到防盗链的效果了？</span><br><span class="line"></span><br><span class="line">将这个http请求发给服务器后，如果服务器要求必须是某个地址或者某几个地址才能访问，而你发送的referer不符合他的要求，就会拦截或者跳转到他要求的地址，然后再通过这个地址进行访问。</span><br><span class="line"></span><br><span class="line">2.防止恶意请求。</span><br><span class="line">比如静态请求是*.html结尾的，动态请求是*.shtml，那么由此可以这么用，所有的*.shtml请求，必须 Referer  为我自己的网站。</span><br><span class="line">Referer=http://www.google.com </span><br><span class="line">空Referer是怎么回事？什么情况下会出现Referer?</span><br><span class="line">首先，我们对空 Referer  的定义为， Referer  头部的内容为空，或者，一个 HTTP  请求中根本不包含 Referer  头部。</span><br><span class="line"></span><br><span class="line">那么什么时候 HTTP  请求会不包含 Referer  字段呢？根据Referer的定义，它的作用是指示一个请求是从哪里链接过来，那么当一个请求并不是由链接触发产生的，那么自然也就不需要指定这个请求的链接来源。</span><br><span class="line"></span><br><span class="line">比如，直接在浏览器的地址栏中输入一个资源的URL地址，那么这种请求是不会包含 Referer  字段的，因为这是一个“凭空产生”的 HTTP  请求，并不是从一个地方链接过去的。</span><br><span class="line"></span><br><span class="line">那么在防盗链设置中，允许空Referer和不允许空Referer有什么区别？</span><br><span class="line">允许 Referer 为空，意味着你允许比如浏览器直接访问，就是空。</span><br></pre></td></tr></table></figure>
+
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://zhangyj131.github.io" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 zhangyj</li>
+      <li><a href="https://zhangyj131.github.io">Home</a></li>
+      
+      <li><a target="_blank" rel="noopener" href="https://github.com/zhangyj131">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a target="_blank" rel="noopener" href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a target="_blank" rel="noopener" href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

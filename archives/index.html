@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    zhangyj Blog
+  </title>
+  <meta name="description" content="My Blog Description">
+  
+  <meta name="author" content="zhangyj">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20220327204436.bmp"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  
+
+<div class="container-lg">
+  
+
+<div class="blog-intro">
+  <div class="blog-intro-user">
+    <img class="avatar" src="https://cdn.jsdelivr.net/gh/zhangyj131/mdpicture/docs/20220327204436.bmp">
+    <div class="user-name">
+      <div class="blog-title"></div>
+      <div class="blog-author"></div>
+        <ul class="user-detail mobile-only">
+    
+    <li>
+      <i class="fa fa-map-marker"></i>
+      Asia/Shanghai
+    </li>
+    
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:zhangyj131@foxmail">zhangyj131@foxmail</a>
+    </li>
+    
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="https://zhangyj131.github.io">https://zhangyj131.github.io</a>
+    </li>
+  </ul>
+    </div>
+    <div class="blog-description">
+      
+    </div>
+  </div>
+
+  <ul class="user-detail desktop-only">
+    
+    <li>
+      <i class="fa fa-map-marker"></i>
+      Asia/Shanghai
+    </li>
+    
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:zhangyj131@foxmail">zhangyj131@foxmail</a>
+    </li>
+    
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="https://zhangyj131.github.io">https://zhangyj131.github.io</a>
+    </li>
+  </ul>
+
+  <div class="social-media desktop-only">
+    <h4>Social Media</h4>
+    <ul>
+      
+      <li class="social-media-item"><a href="https://github.com/zhangyj131" target="_blank"><i class="fa fa-github"></i></a></li>
+      
+    </ul>
+  </div>
+</div>
+
+
+  <div class="blog-detail">
+    
+<nav class="blog-detail-nav desktop-only">
+  <ul class="clearfix">
+    <li class="">
+      <a href="/">Overview</a></li>
+    <li class="selected">
+      <a href="/archives">Posts <span class="counter">5</span></a>
+    </li>
+    <li class="">
+      <a href="/categories">Categories <span
+                class="counter">2</span></a></li>
+    <li class="">
+      <a href="/tags">Tags <span class="counter">2</span></a></li>
+  </ul>
+</nav>
+
+    <div class="body-secondary">
+      <ul class="archive-list">
+        
+        <li class="archive-list-item">
+          <h2><a href="/2022/03/29/mysql%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA%E4%B8%80%E4%BA%9B%E5%9D%91/">Untitled</a></h2>
+          <p>
+               前言  记录mysql的错误一些坑，遇到莫名其妙问题了来回查下 
+   1.创建订单表order，在插入时候报错  表结构如下 
+      1   2   3   4   5   6   7   8   9        CREATE   TABLE  ` order ` (     `or...
+          </p>
+          <ul class="tag-list clearfix">
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <i class="fa fa-folder-open"></i> Uncategorized
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 0 </span>
+            <span>Published {{moment(1648487082905).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2022/03/29/java%E5%9F%BA%E7%A1%80/">Untitled</a></h2>
+          <p>
+               1.受检异常vs非受检异常    2.jdk8 stream   collectingAndThen  
+  https://www.jianshu.com/p/a9ad46f86fb4  
+ java.util.stream.Stream.collect(Collector&amp;lt;? sup...
+          </p>
+          <ul class="tag-list clearfix">
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <i class="fa fa-folder-open"></i> Uncategorized
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 0 </span>
+            <span>Published {{moment(1648487082903).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2022/03/29/dubbo%E6%8E%A5%E5%8F%A3%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD%E4%B8%94%E5%85%A5%E5%8F%82%E6%9C%AA%E6%98%BE%E5%BC%8F%E6%8C%87%E5%AE%9A%E5%BA%8F%E5%88%97%E5%8C%96id%E5%AF%BC%E8%87%B4ClassCastException%E5%88%86%E6%9E%90/">Untitled</a></h2>
+          <p>
+               问题描述&amp;amp;模拟  线上登录接口，通过监控查看，有类型转换异常，具体报错如下图 
+   
+ 此报错信息是dubbo consumer端显示，且登录大部分是正常，有少量部分会报类型转换异常，同事通过更换方法名+显示指定序列化id解决此问题，但是产生这个问题的真正原因是什么呢？没有指定序列化...
+          </p>
+          <ul class="tag-list clearfix">
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <i class="fa fa-folder-open"></i> Uncategorized
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 0 </span>
+            <span>Published {{moment(1648487082902).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2022/03/26/hello-world/">Hello World</a></h2>
+          <p>
+             Welcome to  Hexo ! This is your very first post. Check  documentation  for more info. If you get any problems when using Hexo, you can find the answe...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/java/">java</a></li>
+            
+            <li class="tag-list-item"><a href="/tags/linux/">linux</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/%E9%9A%8F%E7%AC%94/"><i class="fa fa-folder-open"></i> 随笔</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment(1648296777000).fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/2017/05/26/cors%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">cors跨域问题</a></h2>
+          <p>
+               前言  最近做系统整合，涉及到统一认证和跨域问题，总结跨域如下，统一认证放另外博客 
+   跨域总结  针对目前都是前后端分离项目，跨域问题很常见，跨域错误通常403如下 
+   
+ 针对跨域解决办法通常是创建filter CorsFilter，允许所有跨域，问题基本都能解决。 
+      ...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item"><a href="/tags/java/">java</a></li>
+            
+          </ul>
+          <div class="post-info">
+            <span>
+              
+              <a class="category-link" href="/categories/web/"><i class="fa fa-folder-open"></i> web</a>
+              
+            </span>
+            <span><i class="fa fa-tag"></i> 1 </span>
+            <span>Published {{moment(1495771977000).fromNow()}}</span>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://zhangyj131.github.io" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 zhangyj</li>
+      <li><a href="https://zhangyj131.github.io">Home</a></li>
+      
+      <li><a target="_blank" rel="noopener" href="https://github.com/zhangyj131">Github</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a target="_blank" rel="noopener" href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a target="_blank" rel="noopener" href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
